@@ -1,9 +1,10 @@
 %define major 0
 %define libname %mklibname clucene %{major}
+%define develname %mklibname clucene -d
 
 Summary:	CLucene is a C++ port of Lucene
 Name:		clucene
-Version:	0.9.16
+Version:	0.9.20
 Release:	%mkrel 1
 License:	LGPL
 Group:		Archiving/Other
@@ -30,13 +31,14 @@ as it is written in C++.
 
 This package contains shared libraries for clucene.
 
-%package -n	%{libname}-devel
+%package -n	%{develname}
 Summary:	Static library and header files for the %{name} library
 Group:		Development/C++
-Provides:	lib%{name}-devel = %{version} %{name}-devel = %{version}
+Provides:	%{name}-devel = %{version}
 Requires:	%{libname} = %{version}
+Obsoletes:	%mklibname -d clucene 0
 
-%description -n	%{libname}-devel
+%description -n	%{develname}
 CLucene is a C++ port of Lucene: the high-performance, full-featured 
 text search engine written in Java. CLucene is faster than lucene 
 as it is written in C++.
@@ -69,9 +71,9 @@ rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr(-,root,root,0755)
-%{_libdir}/*.so.*
+%{_libdir}/*.so.%{major}*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root,0755)
 %{_libdir}/CLucene/clucene-config.h
 %{_includedir}/*
