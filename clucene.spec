@@ -10,7 +10,6 @@ License:	LGPL
 Group:		Archiving/Other
 URL:            http://clucene.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/clucene/%{name}-core-%{version}.tar.bz2
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 CLucene is a C++ port of Lucene: the high-performance, full-featured 
