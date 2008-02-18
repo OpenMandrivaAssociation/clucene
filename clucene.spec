@@ -2,7 +2,7 @@
 %define libname %mklibname clucene %{major}
 %define develname %mklibname clucene -d
 
-Summary:	CLucene is a C++ port of Lucene
+Summary:	C++ port of Lucene
 Name:		clucene
 Version:	0.9.20
 Release:	%mkrel 1
