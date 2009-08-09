@@ -5,7 +5,7 @@
 Summary:	C++ port of Lucene
 Name:		clucene
 Version:	0.9.21b
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	LGPL
 Group:		Archiving/Other
 URL:            http://clucene.sourceforge.net/
