@@ -5,11 +5,12 @@
 Summary:	C++ port of Lucene
 Name:		clucene
 Version:	0.9.21b
-Release:	%mkrel 4
+Release:	%mkrel 5
 License:	LGPL
 Group:		Archiving/Other
 URL:            http://clucene.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/clucene/%{name}-core-%{version}.tar.bz2
+Patch0:		clucene-core-0.9.21b-pthread.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -49,6 +50,7 @@ clucene.
 %prep
 
 %setup -q -n %name-core-%version
+%patch0 -p1
 
 %build
 %configure2_5x
