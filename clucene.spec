@@ -1,43 +1,72 @@
-%define major 0
-%define libname %mklibname clucene %{major}
 %define develname %mklibname clucene -d
+# Do not push for the moment
 
 Summary:	C++ port of Lucene
 Name:		clucene
-Version:	0.9.21b
-Release:	%mkrel 5
+Version:	2.3.3.4
+Release:	%mkrel 0
 License:	LGPL
 Group:		Archiving/Other
 URL:            http://clucene.sourceforge.net/
-Source0:	http://prdownloads.sourceforge.net/clucene/%{name}-core-%{version}.tar.bz2
-Patch0:		clucene-core-0.9.21b-pthread.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:	cmake
+BuildRequires:  zlib-devel
+Source0:	http://prdownloads.sourceforge.net/clucene/%{name}-core-%{version}.tar.gz
+
 
 %description
 CLucene is a C++ port of Lucene: the high-performance, full-featured 
 text search engine written in Java. CLucene is faster than lucene 
 as it is written in C++.
 
-%package -n	%{libname}
+#------------------------------------------------------------------------------
+%define clucene_core_major 2
+%define libclucene_core %mklibname clucene-core %{clucene_core_major} 
+
+%package -n	%libclucene_core
 Summary:	Shared libraries for %{name}
 Group:		System/Libraries
-# Package not exists anymore
-# Orifinal content was just test tools
-Obsoletes: clucene <= 0.9.15
 
-%description -n	%{libname}
+%description -n %libclucene_core
 CLucene is a C++ port of Lucene: the high-performance, full-featured 
 text search engine written in Java. CLucene is faster than lucene 
 as it is written in C++.
 
 This package contains shared libraries for clucene.
 
+%files -n %libclucene_core
+
+%_libdir/libclucene-core.so.*
+
+#------------------------------------------------------------------------------
+
+%define clucene_shared_major 2
+%define libclucene_shared %mklibname clucene_shared %{clucene_shared_major}
+
+
+%package -n     %libclucene_shared
+Summary:        Shared libraries for %{name}
+Group:          System/Libraries
+
+%description -n %libclucene_shared
+CLucene is a C++ port of Lucene: the high-performance, full-featured
+text search engine written in Java. CLucene is faster than lucene
+as it is written in C++.
+
+This package contains shared libraries for clucene.
+
+%files -n %libclucene_shared
+
+%_libdir/libclucene-shared.so.*
+
+#------------------------------------------------------------------------------
+
 %package -n	%{develname}
 Summary:	Static library and header files for the %{name} library
 Group:		Development/C++
-Provides:	%{name}-devel = %{version}
-Requires:	%{libname} = %{version}
-Obsoletes:	%mklibname -d clucene 0
+Provides:	%{name}-devel = %version-%release
+Provides:	lib%{name}-devel = %version-%release
+Requires:	%libclucene_shared = %version-%release
+Requires:       %libclucene_core = %version-%release
 
 %description -n	%{develname}
 CLucene is a C++ port of Lucene: the high-performance, full-featured 
@@ -47,42 +76,28 @@ as it is written in C++.
 This package contains static libraries and development headers for 
 clucene.
 
+%files -n %{develname}
+
+%{_includedir}/CLucene.h
+%{_includedir}/CLucene/
+%_libdir/pkgconfig/libclucene-core.pc
+%_libdir/CLuceneConfig.cmake/CLuceneConfig.cmake
+%_libdir/libclucene-shared.so
+%_libdir/libclucene-core.so
+
+#------------------------------------------------------------------------------
+
+
 %prep
 
 %setup -q -n %name-core-%version
-%patch0 -p1
 
 %build
-%configure2_5x
+%cmake
 
-make
+%make
 
 %install
-rm -rf %{buildroot}
 
-%makeinstall
+%makeinstall_std -C build  
 
-# Provide a pointer to right place
-ln -sf %{_libdir}/CLucene/clucene-config.h %buildroot/%_includedir/CLucene/
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
-
-%files -n %{libname}
-%defattr(-,root,root,0755)
-%{_libdir}/*.so.%{major}*
-
-%files -n %{develname}
-%defattr(-,root,root,0755)
-%{_libdir}/CLucene/clucene-config.h
-%{_includedir}/*
-%{_libdir}/*.so
-%{_libdir}/*.la
-%{_libdir}/*.a
