@@ -9,7 +9,6 @@ Release:	%mkrel -c 0 %{date} 1
 License:	LGPL
 Group:		Archiving/Other
 URL:            http://clucene.sourceforge.net/
-
 # Zé: we are using git, so to generate the source file we run:
 # git archive --prefix=clucene-2.3.3.4/ master | xz > clucene-2.3.3.4.tar.xz
 #Source0:	http://prdownloads.sourceforge.net/clucene/%{name}-core-%{version}.tar.gz
@@ -62,7 +61,6 @@ Provides:	%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
 Requires:	%{libclucene_shared} = %{version}-%{release}
 Requires:       %{libclucene_core} = %{version}-%{release}
-Obsoletes:      %{mklibname -d clucene 0}
 # Zé: we need to add this provides to avoid break upgrade
 %ifnarch x86_64
 Provides:	devel(libclucene)
