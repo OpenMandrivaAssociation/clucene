@@ -62,6 +62,13 @@ Provides:	%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
 Requires:	%{libclucene_shared} = %{version}-%{release}
 Requires:       %{libclucene_core} = %{version}-%{release}
+Obsoletes:      %{mklibname -d clucene 0}
+# Zé: we need to add this provides to avoid break upgrade
+%ifnarch x86_64
+Provides:	devel(libclucene)
+%else
+Provides:	devel(libclucene(64bit))
+%endif
 
 %description -n	%{develname}
 CLucene is a C++ port of Lucene: the high-performance, full-featured 
