@@ -38,7 +38,7 @@ as it is written in C++.
 This package contains shared libraries for clucene.
 
 %files -n %{libclucene_core}
-%{_libdir}/libclucene-core.so.*
+%{_libdir}/libclucene-core.so.%{major}*
 
 #------------------------------------------------------------------------------
 %define libclucene_shared %mklibname clucene_shared %{major}
@@ -54,7 +54,7 @@ as it is written in C++.
 This package contains shared libraries for clucene.
 
 %files -n %{libclucene_shared}
-%{_libdir}/libclucene-shared.so.*
+%{_libdir}/libclucene-shared.so.%{major}*
 
 #------------------------------------------------------------------------------
 %package -n	%{develname}
