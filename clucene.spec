@@ -1,11 +1,11 @@
-%define date 20111202
+%define date 20111220
 %define major 2
 %define develname %mklibname %{name} -d
 
 Summary:	C++ port of Lucene
 Name:		clucene
 Version:	2.3.3.4
-Release:	%mkrel -c %{date} 2
+Release:	%mkrel -c %{date} 1
 License:	LGPL
 Group:		Archiving/Other
 URL:            http://clucene.sourceforge.net/
@@ -16,6 +16,7 @@ Source0:	%{name}-%{version}.tar.xz
 # include LUCENE_SYS_INCLUDES in pkgconfig --cflags output
 # imported fedora patch
 Patch0:		clucene-core-2.3.3.4-pkgconfig_sys_includes.patch
+Patch1:		clucene-2.3.3.4-fix-major.patch
 BuildRequires:	cmake
 BuildRequires:  zlib-devel
 
@@ -29,6 +30,7 @@ as it is written in C++.
 %package -n	%{libclucene_core}
 Summary:	Shared libraries for %{name}
 Group:		System/Libraries
+%rename		%{_lib}clucene_core2
 
 %description -n %{libclucene_core}
 CLucene is a C++ port of Lucene: the high-performance, full-featured 
@@ -91,6 +93,7 @@ clucene.
 %prep
 %setup -q
 %patch0 -p1 -b .pkgconfig_sys_includes
+%patch1 -p1 -b .fix-major
 
 %build
 %cmake
