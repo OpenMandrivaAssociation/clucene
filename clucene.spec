@@ -5,7 +5,7 @@
 Summary:	C++ port of Lucene
 Name:		clucene
 Version:	2.3.3.4
-Release:	%mkrel -c %{date} 1
+Release:	%mkrel -c %{date} 2
 License:	LGPL
 Group:		Archiving/Other
 URL:            http://clucene.sourceforge.net/
@@ -31,6 +31,7 @@ as it is written in C++.
 Summary:	Shared libraries for %{name}
 Group:		System/Libraries
 %rename		%{_lib}clucene_core2
+Provides:	clucene-core2 
 
 %description -n %{libclucene_core}
 CLucene is a C++ port of Lucene: the high-performance, full-featured 
