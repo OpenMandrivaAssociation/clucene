@@ -5,7 +5,7 @@
 Summary:	C++ port of Lucene
 Name:		clucene
 Version:	2.3.3.4
-Release:	%mkrel -c %{date} 2
+Release:	%mkrel -c %{date} 3
 License:	LGPL
 Group:		Archiving/Other
 URL:            http://clucene.sourceforge.net/
@@ -17,6 +17,7 @@ Source0:	%{name}-%{version}.tar.xz
 # imported fedora patch
 Patch0:		clucene-core-2.3.3.4-pkgconfig_sys_includes.patch
 Patch1:		clucene-2.3.3.4-fix-major.patch
+Patch2:		patch-clucene-2.3.3.4-install-contribs-lib.diff
 BuildRequires:	cmake
 BuildRequires:  zlib-devel
 
@@ -60,6 +61,19 @@ This package contains shared libraries for clucene.
 %{_libdir}/libclucene-shared.so.%{major}*
 
 #------------------------------------------------------------------------------
+%define contrib %mklibname clucene-contribs-lib %{major}
+%package -n %contrib
+Summary: Language specific text analyzers for %name
+Group: System/Libraries
+Requires: %libclucene_core = %version-%release
+
+%description -n %contrib
+Language specific text analyzers for %name
+
+%files -n %contrib
+%_libdir/libclucene-contribs-lib.so.%{major}*
+
+#------------------------------------------------------------------------------
 %package -n	%{develname}
 Summary:	Static library and header files for the %{name} library
 Group:		Development/C++
@@ -87,17 +101,17 @@ clucene.
 %{_includedir}/CLucene/
 %{_libdir}/pkgconfig/libclucene-core.pc
 %{_libdir}/CLuceneConfig.cmake/CLuceneConfig.cmake
-%{_libdir}/libclucene-shared.so
-%{_libdir}/libclucene-core.so
+%{_libdir}/lib*.so
 
 #------------------------------------------------------------------------------
 %prep
 %setup -q
 %patch0 -p1 -b .pkgconfig_sys_includes
 %patch1 -p1 -b .fix-major
+%patch2 -p1 -b .contrib-libs~
 
 %build
-%cmake
+%cmake -DBUILD_CONTRIBS_LIB:BOOL=ON
 %make
 
 %install
