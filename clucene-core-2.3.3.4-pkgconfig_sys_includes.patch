@@ -1,0 +1,11 @@
+--- clucene-2.3.3.4/src/core/libclucene-core.pc.cmake.pkgconfig_sys_includes	2011-05-26 13:35:04.000000000 +0200
++++ clucene-2.3.3.4/src/core/libclucene-core.pc.cmake	2012-09-03 04:52:42.217640562 +0200
+@@ -6,6 +6,6 @@ includedir=${prefix}/include:${prefix}/i
+ Name: libclucene
+ Description: CLucene - a C++ search engine, ported from the popular Apache Lucene
+ Version: @CLUCENE_VERSION_MAJOR@.@CLUCENE_VERSION_MINOR@.@CLUCENE_VERSION_REVISION@.@CLUCENE_VERSION_PATCH@
+-Libs: -L${prefix}/@LIB_DESTINATION@/ -lclucene-core
+-Cflags: -I${prefix}/include -I${prefix}/include/CLucene/ext
++Libs: -lclucene-core
++Cflags: -I${prefix}/include/CLucene -I${prefix}/include/CLucene/ext
+ ~
