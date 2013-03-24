@@ -9,7 +9,7 @@ Release:	%mkrel -c %{date} 4
 License:	LGPL
 Group:		Archiving/Other
 Url:            http://clucene.sourceforge.net/
-# Zé: we are using git, so to generate the source file we run:
+# Ze: we are using git, so to generate the source file we run:
 # git archive --prefix=clucene-2.3.3.4/ master | xz > clucene-2.3.3.4.tar.xz
 #Source0:	http://prdownloads.sourceforge.net/clucene/%{name}-core-%{version}.tar.gz
 Source0:	%{name}-%{version}.tar.xz
@@ -114,4 +114,3 @@ clucene.
 
 %install
 %makeinstall_std -C build
-
