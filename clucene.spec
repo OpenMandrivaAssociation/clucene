@@ -1,11 +1,11 @@
-%define date 20111220
+%define date	20111220
 %define major	2
 %define devname	%mklibname %{name} -d
 
 Summary:	C++ port of Lucene
 Name:		clucene
 Version:	2.3.3.4
-Release:	%mkrel -c %{date} 4
+Release:	0.%{date}.5
 License:	LGPL
 Group:		Archiving/Other
 Url:            http://clucene.sourceforge.net/
@@ -65,7 +65,6 @@ This package contains shared libraries for clucene.
 %package -n	%contrib
 Summary:	Language specific text analyzers for %{name}
 Group:		System/Libraries
-Requires:	%libclucene_core = %{version}-%{release}
 
 %description -n %contrib
 Language specific text analyzers for %{name}
@@ -80,6 +79,7 @@ Group:		Development/C++
 Provides:	%{name}-devel = %{version}-%{release}
 Requires:	%{libclucene_shared} = %{version}-%{release}
 Requires:       %{libclucene_core} = %{version}-%{release}
+Requires:       %{contrib} = %{version}-%{release}
 # Zé: we need to add this provides to avoid break upgrade
 %ifnarch x86_64
 Provides:	devel(libclucene)
@@ -114,3 +114,4 @@ clucene.
 
 %install
 %makeinstall_std -C build
+
