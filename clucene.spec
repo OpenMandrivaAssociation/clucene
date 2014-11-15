@@ -5,7 +5,7 @@
 Summary:	C++ port of Lucene
 Name:		clucene
 Version:	2.3.3.4
-Release:	0.%{date}.6
+Release:	0.%{date}.7
 License:	LGPL
 Group:		Archiving/Other
 Url:            http://clucene.sourceforge.net/
@@ -106,6 +106,10 @@ clucene.
 %prep
 %setup -q
 %apply_patches
+# patch out installing bundled boost headers, we build against system one
+sed -i \
+	-e '/ADD_SUBDIRECTORY (src\/ext)/d' \
+	CMakeLists.txt 
 
 %build
 %cmake \
