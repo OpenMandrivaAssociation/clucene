@@ -1,11 +1,11 @@
-%define date	20111220
+%define date	20141115
 %define major	2
 %define devname	%mklibname %{name} -d
 
 Summary:	C++ port of Lucene
 Name:		clucene
 Version:	2.3.3.4
-Release:	0.%{date}.5
+Release:	0.%{date}.6
 License:	LGPL
 Group:		Archiving/Other
 Url:            http://clucene.sourceforge.net/
