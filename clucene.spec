@@ -5,7 +5,7 @@
 Summary:	C++ port of Lucene
 Name:		clucene
 Version:	2.3.3.4
-Release:	0.%{date}.7
+Release:	0.%{date}.8
 License:	LGPL
 Group:		Archiving/Other
 Url:            http://clucene.sourceforge.net/
@@ -13,11 +13,22 @@ Url:            http://clucene.sourceforge.net/
 # git archive --prefix=clucene-2.3.3.4/ master | xz > clucene-2.3.3.4.tar.xz
 #Source0:	http://prdownloads.sourceforge.net/clucene/%{name}-core-%{version}.tar.gz
 Source0:	%{name}-%{version}.tar.xz
+Patch0:		clucene-2.3.3.4-fix-major.patch
+## upstreamable patches
 # include LUCENE_SYS_INCLUDES in pkgconfig --cflags output
-# imported fedora patch
-Patch0:		clucene-core-2.3.3.4-pkgconfig_sys_includes.patch
-Patch1:		clucene-2.3.3.4-fix-major.patch
-Patch2:		patch-clucene-2.3.3.4-install-contribs-lib.diff
+# https://bugzilla.redhat.com/748196
+# and
+# https://sourceforge.net/tracker/?func=detail&aid=3461512&group_id=80013&atid=558446
+# pkgconfig file is missing clucene-shared
+Patch50:	clucene-core-2.3.3.4-pkgconfig.patch
+# https://bugzilla.redhat.com/794795
+# https://sourceforge.net/tracker/index.php?func=detail&aid=3392466&group_id=80013&atid=558446
+# contribs-lib is not built and installed even with config
+Patch51:	clucene-core-2.3.3.4-install_contribs_lib.patch
+# Don't install CLuceneConfig.cmake twice
+Patch52:	clucene-core-2.3.3.4-CLuceneConfig.patch
+# Fix tests for undefined usleep
+Patch53:	clucene-core-2.3.3.4-usleep.patch
 BuildRequires:	cmake
 BuildRequires:	pkgconfig(zlib)
 
@@ -99,7 +110,6 @@ clucene.
 %{_includedir}/CLucene.h
 %{_includedir}/CLucene/
 %{_libdir}/pkgconfig/libclucene-core.pc
-%{_libdir}/CLuceneConfig.cmake/CLuceneConfig.cmake
 %{_libdir}/lib*.so
 
 #------------------------------------------------------------------------------
