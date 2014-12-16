@@ -5,7 +5,7 @@
 Summary:	C++ port of Lucene
 Name:		clucene
 Version:	2.3.3.4
-Release:	0.%{date}.8
+Release:	0.%{date}.9
 License:	LGPL
 Group:		Archiving/Other
 Url:            http://clucene.sourceforge.net/
@@ -109,6 +109,7 @@ clucene.
 %files -n %{devname}
 %{_includedir}/CLucene.h
 %{_includedir}/CLucene/
+%{_libdir}/CLucene/
 %{_libdir}/pkgconfig/libclucene-core.pc
 %{_libdir}/lib*.so
 
@@ -123,7 +124,8 @@ sed -i \
 
 %build
 %cmake \
-	-DBUILD_CONTRIBS_LIB:BOOL=ON
+	-DBUILD_CONTRIBS_LIB:BOOL=ON \
+	-DLUCENE_SYS_INCLUDES=%{_libdir}
 %make
 
 %install
