@@ -25,3 +25,15 @@ diff -up clucene-2.3.3.4/src/core/CLucene/queryParser/QueryParserTokenManager.cp
  };
  const int32_t QueryParserTokenManager::jjnextStates[]={
  		15, 17, 18, 29, 32, 23, 33, 30, 20, 21, 32, 23, 33, 31, 34, 27,
+diff -up clucene-2.3.3.4/src/core/CLucene/queryParser/legacy/Lexer.cpp.omv~ clucene-2.3.3.4/src/core/CLucene/queryParser/legacy/Lexer.cpp
+--- clucene-2.3.3.4/src/core/CLucene/queryParser/legacy/Lexer.cpp.omv~	2018-05-14 11:15:24.990206806 +0200
++++ clucene-2.3.3.4/src/core/CLucene/queryParser/legacy/Lexer.cpp	2018-05-14 11:15:34.355981469 +0200
+@@ -117,7 +117,7 @@ bool Lexer::GetNextToken(QueryToken* tok
+       if( _istspace(ch)!=0 ) {
+          continue;
+       }
+-      TCHAR buf[2] = {ch,'\0'};
++      TCHAR buf[2] = {static_cast<TCHAR>(ch),'\0'};
+       switch(ch) {
+          case '+':
+             token->set(buf, QueryToken::PLUS);
