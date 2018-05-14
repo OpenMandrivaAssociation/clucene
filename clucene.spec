@@ -29,6 +29,8 @@ Patch51:	clucene-core-2.3.3.4-install_contribs_lib.patch
 Patch52:	clucene-core-2.3.3.4-CLuceneConfig.patch
 # Fix tests for undefined usleep
 Patch53:	clucene-core-2.3.3.4-usleep.patch
+# Cast some static initializers to correct type
+Patch54:	clucene-2.3.3-clang-7.0.patch
 BuildRequires:	cmake
 BuildRequires:	pkgconfig(zlib)
 
