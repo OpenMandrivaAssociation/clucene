@@ -118,7 +118,7 @@ clucene.
 #------------------------------------------------------------------------------
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 # patch out installing bundled boost headers, we build against system one
 sed -i \
 	-e '/ADD_SUBDIRECTORY (src\/ext)/d' \
