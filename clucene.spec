@@ -8,7 +8,7 @@ Version:	2.3.3.4
 Release:	0.%{date}.11
 License:	LGPL
 Group:		Archiving/Other
-Url:            http://clucene.sourceforge.net/
+Url:            https://clucene.sourceforge.net/
 # Ze: we are using git, so to generate the source file we run:
 # git archive --prefix=clucene-2.3.3.4/ master | xz > clucene-2.3.3.4.tar.xz
 #Source0:	http://prdownloads.sourceforge.net/clucene/%{name}-core-%{version}.tar.gz
